@@ -42,8 +42,8 @@ public class BinaryNode {
 
 	@Override
 	public String toString() {
-		return "BinaryNode {element=" + element + ", leftNode=" + leftNode
-				+ ", rightNode=" + rightNode + "}";
+		return "BinaryNode {element= " + element + ", leftNode= " + leftNode
+				+ ", rightNode= " + rightNode + "}";
 	}
     
 }
