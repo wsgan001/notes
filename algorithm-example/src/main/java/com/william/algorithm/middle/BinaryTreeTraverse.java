@@ -247,7 +247,7 @@ public class BinaryTreeTraverse {
         while (!q.isEmpty()) {
             BinaryNode p = (BinaryNode) q.poll();
             //取出队首结点 p 并访问
-            containList.offer(p);
+            containList.add(p);
             if (p.getLeftNode() != null) q.offer(p.getLeftNode());  //将p的非空左右孩子依次入队
             if (p.getRightNode() != null) q.offer(p.getRightNode());
         }
