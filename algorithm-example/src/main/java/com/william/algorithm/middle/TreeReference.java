@@ -115,15 +115,22 @@ public class TreeReference {
         int n = nodes.length;
         if (n < 2) return nodes[0];
         List l = new LinkedList();    //根结点线性表,按 weight 从大到小有序
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++) {
             //将结点逐一插入线性表
             insertToList(l, nodes[i]);
+        }
+
         for (int i = 1; i < n; i++) { //选择 weight 最小的两棵树合并,循环 n-1 次
             HuffmanTreeNode min1 = (HuffmanTreeNode) l.remove(l.size() - 1);
             HuffmanTreeNode min2 = (HuffmanTreeNode) l.remove(l.size() - 1);
             HuffmanTreeNode newRoot = new HuffmanTreeNode(min1.getWeight() + min2.getWeight());
+            /*if(i + 1 == n) {
+                newRoot.setParent(null);
+            }*/
             newRoot.setLeftNode(min1);
             newRoot.setRightNode(min2); //合并
+//            min1.setParent(newRoot);
+//            min2.setParent(newRoot);
             insertToList(l, newRoot);   //新树插入线性表
         }
         return (HuffmanTreeNode) l.get(0);//返回 Huffman 树的根
@@ -148,8 +155,8 @@ public class TreeReference {
      * @param root
      */
     private static void generateHuffmanCode(HuffmanTreeNode root){
-        if (root==null) return;
-        if (root.getParent() != null){
+        if (root == null) return;
+        if (root.getParent() != null) {
             HuffmanTreeNode currentNode = (HuffmanTreeNode)root.getParent().getLeftNode();
             if (currentNode == root)
                 root.setCoding(currentNode.getCoding() + "0"); //向左为 0
@@ -161,17 +168,19 @@ public class TreeReference {
     }
 
     public static void main(String[] args) {
+        HuffmanTreeNode node7 = new HuffmanTreeNode(7);
+        HuffmanTreeNode node4 = new HuffmanTreeNode(4);
+        HuffmanTreeNode node2 = new HuffmanTreeNode(2);
+        HuffmanTreeNode node9 = new HuffmanTreeNode(9);
+        HuffmanTreeNode node15 = new HuffmanTreeNode(15);
+        HuffmanTreeNode node5 = new HuffmanTreeNode(5);
         HuffmanTreeNode[] huffmanTreeNodes = new HuffmanTreeNode[]{
-                new HuffmanTreeNode(7),
-                new HuffmanTreeNode(4),
-                new HuffmanTreeNode(2),
-                new HuffmanTreeNode(9),
-                new HuffmanTreeNode(15),
-                new HuffmanTreeNode(5),
+                node7, node4, node2, node9, node15, node5
         };
 
         HuffmanTreeNode root = buildHuffmanTree(huffmanTreeNodes);
-        System.out.println("HuffmanTreeNode root ---- : " + root);
+        System.out.println("buildHuffmanTree root ---- : " + root);
         generateHuffmanCode(root);
+        System.out.println("generateHuffmanCode root ---- : " + root);
     }
 }
