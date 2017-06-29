@@ -94,6 +94,29 @@ public class BinaryTreeTraverse {
 
         System.out.println("find out e : " + searchE(root, "*"));
         System.out.println("find out e : " + searchE(root, "d"));
+
+
+        BinaryNode nA = new BinaryNode("A");
+        BinaryNode nB = new BinaryNode("B");
+        BinaryNode nC = new BinaryNode("C");
+        BinaryNode nD = new BinaryNode("D");
+        BinaryNode nE = new BinaryNode("E");
+        BinaryNode nF = new BinaryNode("F");
+        BinaryNode nG = new BinaryNode("G");
+        BinaryNode nH = new BinaryNode("H");
+
+        nA.setLeftNode(nB);
+        nA.setRightNode(nC);
+
+        nB.setLeftNode(nD);
+        nB.setRightNode(nE);
+
+        nC.setLeftNode(nG);
+        nC.setRightNode(nH);
+
+        LinkedList<BinaryNode> linkedList = new LinkedList<BinaryNode>();
+        preOrderRecursion(nA, linkedList);
+        System.out.println("preOrderRecursion " + printSentence(linkedList));
     }
 
     /**
