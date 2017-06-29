@@ -131,6 +131,8 @@ public class BinaryTreeTraverse {
 
     /**
      * 先序遍历的非递归算法
+     * 思路: 内循环向左一直遍历到尽头，遇到右子树就入栈，待外层循环逐个出栈遍历。
+     *      内循环非空就放入结果集
      */
     private static void preOrderTraverse(BinaryNode root, LinkedList<BinaryNode> containList) {
         if (root == null) return;
@@ -166,6 +168,10 @@ public class BinaryTreeTraverse {
 
     /**
      * 中序遍历的非递归算法
+     * 思路：    内循环向左一直遍历到尽头，遇到左节点就入栈，直到叶节点(包括叶节点);
+     *      之后逐个出栈放入结果集，进入外循环逐个遍历栈中右子树。
+     *          内循环遍历左子树并入栈，外循环出栈便利右子树
+     *
      */
     private static void inOrderTraverse(BinaryNode root, LinkedList<BinaryNode> containList) {
         if (root == null) return;
@@ -204,6 +210,10 @@ public class BinaryTreeTraverse {
 
     /**
      * 后序遍历的非递归算法
+     * 思路：    内循环向左一直遍历到尽头，遇到节点就入栈，直到叶节点(包括叶节点);
+     *      之后取栈顶放入结果集，之后转向栈顶根结点的右子树继续后序遍历，出栈顺序遍历右子树。
+     *          内循环遍历左子树并入栈
+     *          外循环按出栈顺序遍历右子树
      */
     private static void postOrderTraverse(BinaryNode root, LinkedList<BinaryNode> containList) {
         if (root == null) return;
@@ -235,6 +245,7 @@ public class BinaryTreeTraverse {
 
     /**
      * 使用队列完成二叉树的按层遍历
+     * 思路： 使用队列保证左右子树的遍历顺序
      *
      * @param root
      * @param containList
