@@ -1,34 +1,11 @@
 package com.william.async;
 
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
-
 /**
- * Created by william on 17-6-15.
+ * Created by william on 17-7-4.
  */
-@Component
-public class SpringAsyncService {
+public interface SpringAsyncService {
 
-    public String sayHello(String who) {
-        asyncPrint();
-        String result = who + " say hello to william!";
-        System.out.println(result + " inner ...");
-        return result;
-    }
+    public String sayHello(String who);
 
-    @Async
-    private void asyncPrint() {
-        new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("asyncPrint -------- start");
-                try {
-                    Thread.sleep(10000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.println("asyncPrint -------- end");
-            }
-        };
-    }
+    public void asyncSayHello();
 }

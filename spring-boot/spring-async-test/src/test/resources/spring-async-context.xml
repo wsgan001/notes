@@ -12,7 +12,7 @@
 		http://www.springframework.org/schema/task/spring-task-3.1.xsd"
        default-lazy-init="false">
 
-    <context:annotation-config />
+    <context:component-scan base-package="com.william.async"/>
 
     <!-- 支持Spring @Async异步任务 -->
     <bean id="defaultAsyncTaskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
@@ -23,11 +23,4 @@
     <!-- <task:executor id="defaultAsyncTaskExecutor" pool-size="80"  /> -->
     <task:scheduler id="defaultAsyncTaskScheduler" pool-size="20" />
     <task:annotation-driven executor="defaultAsyncTaskExecutor" scheduler="defaultAsyncTaskScheduler"/>
-
-    <bean id="asyncService" class="com.william.async.SpringAsyncService"></bean>
-
-    <!--<bean id="albumAsyncTaskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
-        <property name="corePoolSize" value="60" />
-        <property name="maxPoolSize" value="80" />
-    </bean>-->
 </beans>
