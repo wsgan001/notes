@@ -1,7 +1,7 @@
+package com.william.distributedlock;
+
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;
-import redis.clients.jedis.Response;
-import redis.clients.jedis.Transaction;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
