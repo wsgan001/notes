@@ -23,8 +23,7 @@ public class NormalHashCluster extends Cluster {
     @Override
     public Node get(String key) {
         long hash = hash(key);
-        long index = hash % nodes.size();
+        long index = Math.abs(hash % nodes.size());
         return nodes.get((int) index);
-
     }
 }
