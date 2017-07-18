@@ -1,5 +1,7 @@
 package com.william.algorithm.middle;
 
+import java.util.Iterator;
+
 /**
  * Created by william on 17-6-29.
  */
@@ -36,14 +38,99 @@ public class GraphReference {
      *  很少边(如 m < n log n)的图称为稀疏图,反之边较多的图称为稠密图。
      *
      *  子图(subgraph) 生成子图(spanning subgraph)
-     *
-     *
      *  路径、环路及可达分量
-     *
      *  连通性与连通分量
+     *  无向图的生成树  对于无向图 G = ( V , E )。如果 G 是连通图,则 G 的生成树(spanning tree),
+     *  是 G 的一个极小连通生成子图。
      */
+    abstract class GraphADT {
+        // 数据对象 D:D 是具有相同性质的数据元素的集合。
+        // 数据关系 R:R = {<u , v>| P(u , v)∧(u,v∈D)}
+        // 基本操作:
+        public abstract int getType();
+        //返回图的顶点数
+        public abstract int getVexNum();
+        //返回图的边数
+        public abstract int getEdgeNum();
+        //返回图的所有顶点
+        public abstract Iterator getVertex();
+        //返回图的所有边
+        public abstract Iterator getEdge();
+        //删除一个顶点 v
+        public abstract void remove(Vertex v);
+        //删除一条边 e
+        public abstract void remove(Edge e);
+        //添加一个顶点 v
+        public abstract Node insert(Vertex v);
+        //添加一条边 e
+        public abstract Node insert(Edge e);
+        //判断顶点 u、v 是否邻接,即是否有边从 u 到 v
+        public abstract boolean areAdjacent(Vertex u, Vertex v);
+        //返回从 u 指向 v 的边,不存在则返回 null
+        public abstract Edge edgeFromTo(Vertex u, Vertex v);
+        //返回从 u 出发可以直接到达的邻接顶点
+        public abstract Iterator adjVertexs(Vertex u);
+        //对图进行深度优先遍历
+        public abstract Iterator DFSTraverse(Vertex v);
+        //对图进行广度优先遍历
+        public abstract Iterator BFSTraverse(Vertex v);
+        //求顶点 v 到其他顶点的最短路径
+        public abstract Iterator shortestPath(Vertex v);
+        //求无向图的最小生成树,如果是有向图不支持此操作
+        public abstract void generateMST() throws UnsupportedOperation;
+        //求有向图的拓扑序列,无向图不支持此操作
+        public abstract Iterator toplogicalSort() throws UnsupportedOperation;
+        //求有向无环图的关键路径,无向图不支持此操作
+        public abstract void criticalPath() throws UnsupportedOperation;
+    }
 
+    public interface Graph {
+        public static final int UndirectedGraph = 0;//无向图
+        public static final int DirectedGraph = 1;  //有向图
+        //返回图的类型
+        public int getType();
+        //返回图的顶点数
+        public int getVexNum();
+        //返回图的边数
+        public int getEdgeNum();
+        //返回图的所有顶点
+        public Iterator getVertex();
+        //返回图的所有边
+        public Iterator getEdge();
+        //删除一个顶点 v
+        public void remove(Vertex v);
+        //删除一条边 e
+        public void remove(Edge e);
+        //添加一个顶点 v
+        public Node insert(Vertex v);
+        //添加一条边 e
+        public Node insert(Edge e);
+        //判断顶点 u、v 是否邻接,即是否有边从 u 到 v
+        public boolean areAdjacent(Vertex u, Vertex v);
+        //返回从 u 指向 v 的边,不存在则返回 null
+        public Edge edgeFromTo(Vertex u, Vertex v);
+        //返回从 u 出发可以直接到达的邻接顶点
+        public Iterator adjVertexs(Vertex u);
+        //对图进行深度优先遍历
+        public Iterator DFSTraverse(Vertex v);
+        //对图进行广度优先遍历
+        public Iterator BFSTraverse(Vertex v);
+        //求顶点 v 到其他顶点的最短路径
+        public Iterator shortestPath(Vertex v);
+        //求无向图的最小生成树,如果是有向图不支持此操作
+        public void generateMST() throws UnsupportedOperation;
+        //求有向图的拓扑序列,无向图不支持此操作
+        public Iterator toplogicalSort() throws UnsupportedOperation;
+        //求有向无环图的关键路径,无向图不支持此操作
+        public void criticalPath() throws UnsupportedOperation;
+    }
 
-    
-
+    class Node {}
+    class Vertex {}
+    class Edge {}
+    class UnsupportedOperation extends Exception {
+        public UnsupportedOperation(String err) {
+            super(err);
+        }
+    }
 }
