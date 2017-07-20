@@ -9,6 +9,8 @@ select @@global.tx_isolation;
  set global transaction isolation level repeatable read;
 --5.命令行，开始事务时
  set autocommit=off 或者 start transaction;
+--6.查看mysql当前事务设置
+ show variables like 'tx_%';
 
 --1、read uncommitted数据测试 --允许脏读取，但不允许更新丢失
 --更改事务T1、T2的隔离级别均为：read uncommitted
