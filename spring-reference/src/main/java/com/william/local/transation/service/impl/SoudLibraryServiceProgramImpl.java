@@ -28,7 +28,6 @@ public class SoudLibraryServiceProgramImpl implements ISoundLibraryService {
     @Autowired
     private ISoundLibraryDao soundLibraryDao;
 
-    @Override
     public void createLibrary(LibraryInfo libraryInfo, IPWhiteList ipWhiteList) {
 
         DefaultTransactionDefinition def = new DefaultTransactionDefinition();
@@ -48,12 +47,10 @@ public class SoudLibraryServiceProgramImpl implements ISoundLibraryService {
         }
     }
 
-    @Override
     public List<LibraryInfo> getAllLibraries() {
         return soundLibraryDao.selectLibraryInfos();
     }
 
-    @Override
     public List<IPWhiteList> getIPWhiteListsByLibrary(int libraryId) {
         return soundLibraryDao.selectIPWhiteList(libraryId);
     }

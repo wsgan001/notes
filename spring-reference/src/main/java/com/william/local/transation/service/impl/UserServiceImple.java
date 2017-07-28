@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 @Service("userService")
 public class UserServiceImple implements IUserService{
 
-    @Override
     public void createUser(User user) {
 
         System.out.println("--------createUser : " + user);

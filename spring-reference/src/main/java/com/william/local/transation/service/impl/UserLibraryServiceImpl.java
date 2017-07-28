@@ -26,7 +26,6 @@ public class UserLibraryServiceImpl implements IUserLibraryService {
     @Autowired
     private ISoundLibraryService soundLibraryService;
 
-    @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
     public void createUserLibrary() {
         userService.createUser(new User(122, "zhangsanfeng"));

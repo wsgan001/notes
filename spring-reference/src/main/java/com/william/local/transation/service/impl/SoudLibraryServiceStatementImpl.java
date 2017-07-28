@@ -20,7 +20,6 @@ public class SoudLibraryServiceStatementImpl implements ISoundLibraryService {
     @Autowired
     private ISoundLibraryDao soundLibraryDao;
 
-    @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
     public void createLibrary(LibraryInfo libraryInfo, IPWhiteList ipWhiteList) {
         soundLibraryDao.insertLibraryInfo(libraryInfo);
@@ -29,12 +28,10 @@ public class SoudLibraryServiceStatementImpl implements ISoundLibraryService {
         soundLibraryDao.insertIPWhiteList(ipWhiteList);
     }
 
-    @Override
     public List<LibraryInfo> getAllLibraries() {
         return soundLibraryDao.selectLibraryInfos();
     }
 
-    @Override
     public List<IPWhiteList> getIPWhiteListsByLibrary(int libraryId) {
         return soundLibraryDao.selectIPWhiteList(libraryId);
     }
