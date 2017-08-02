@@ -45,6 +45,15 @@
             <artifactId>spring-data-redis</artifactId>
             <version>1.8.0.RELEASE</version>
         </dependency>
+        <!--    MultithreadedTC 是一个 Java 库用来测试并发应用。它的主要目的是为了解决并发应用的不确定的问题。
+            你不能控制他们的执行顺序。为了这个目睹，它包含了内部节拍器来控制应用的不同线程的执行顺序。
+            这些测试线程作为类的方法来实现的。-->
+        <dependency>
+            <groupId>com.googlecode.multithreadedtc</groupId>
+            <artifactId>multithreadedtc</artifactId>
+            <version>1.01</version>
+            <scope>test</scope>
+        </dependency>
         <!--RedLock java JDK 1.8+ compatible -->
         <dependency>
             <groupId>org.redisson</groupId>
