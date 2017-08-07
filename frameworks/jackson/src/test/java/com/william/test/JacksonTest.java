@@ -1,5 +1,6 @@
 package com.william.test;
 
+import com.william.test.domain.UserInfo;
 import org.junit.Test;
 
 import java.util.Date;
@@ -14,13 +15,8 @@ public class JacksonTest {
     public void testJackson() {
         UserInfo userInfo = new UserInfo();
         userInfo.setId(10001);
-        userInfo.setUid(10001);
         userInfo.setUsername("william");
-        userInfo.setUpdatedAt(new Date());
-
-
-
-
+        userInfo.setCreatedAt(new Date());
     }
 
 }
