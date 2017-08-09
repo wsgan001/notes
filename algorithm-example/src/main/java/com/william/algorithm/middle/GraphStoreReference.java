@@ -6,9 +6,9 @@ package com.william.algorithm.middle;
 public class GraphStoreReference {
     /**
      *  图的存储：
-     *      1、邻接矩阵(adjacent matrix)
-     *      2、邻接表(adjacency list)
-     *      3、双链式存储结构
+     *      1、邻接矩阵(adjacent matrix)    或取称数组表示法
+     *      2、邻接表(adjacency list)       或称链表表示法
+     *      3、双链式存储结构                或称双端链表表示法
      *
      *  图的遍历:
      *      就是从图中某个顶点出发,按某种方法对图中所有顶点访问且仅访问一次。图的遍历算法是求解图的
@@ -24,4 +24,5 @@ public class GraphStoreReference {
      *      1、拓扑排序
      *      2、关键路径
      */
+
 }

@@ -125,9 +125,9 @@ public class GraphReference {
         public void criticalPath() throws UnsupportedOperation;
     }
 
-    class Node {}
-    class Vertex {}
-    class Edge {}
+    class Node {}       //节点
+    class Vertex {}     //顶点
+    class Edge {}       //边
     class UnsupportedOperation extends Exception {
         public UnsupportedOperation(String err) {
             super(err);
