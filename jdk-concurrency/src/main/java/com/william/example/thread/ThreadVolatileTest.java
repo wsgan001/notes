@@ -4,6 +4,8 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * Created by william on 17-10-11.
+ * http://www.importnew.com/16127.html
+ * http://www.cnblogs.com/wrencai/p/5704331.html(volatile内存模型转换)
  */
 public class ThreadVolatileTest {
     public static volatile int race = 0;
