@@ -8,10 +8,10 @@ import java.util.Stack;
 public class ClassLoaderTest {
 
     /**
-     *  1.类加载器:
-     *    引导类加载器     -这里未打印
-     *    扩展类加载器     -ExtClassLoader
-     *    应用程序类加载器  -AppClassLoader
+     * 1.类加载器:
+     * 引导类加载器     -这里未打印
+     * 扩展类加载器     -ExtClassLoader
+     * 应用程序类加载器  -AppClassLoader
      */
     public static void main(String[] args) {
         ClassLoader loader = ClassLoaderTest.class.getClassLoader();
@@ -28,7 +28,7 @@ public class ClassLoaderTest {
     }
 
     /**
-     *  2.
+     * 2.
      */
     public void testClassIdentity() {
 
