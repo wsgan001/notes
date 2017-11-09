@@ -12,8 +12,10 @@ def print_subject_cs_ware_map(csware_prefer, start, end, file):
              "created_at between '%s' AND '%s' AND csware_prefer = %s" % (start, end, csware_prefer)
 
     try:
-        conn_forge = MySQLdb.connect(host="", user="forge", passwd="Zhangmen1dui1", db='forge', charset="utf8")
-        conn_tr = MySQLdb.connect(host="", user="forge", passwd="zhangmen1dui1", db="tr", charset="utf8")
+        conn_forge = MySQLdb.connect(host="", user="",
+                                     passwd="", db='forge', charset="utf8")
+        conn_tr = MySQLdb.connect(host="", user="",
+                                  passwd="", db="tr", charset="utf8")
         cursor_forge = conn_forge.cursor()
         cursor_tr = conn_tr.cursor()
         n_tr = cursor_tr.execute(sql_tr)
@@ -52,7 +54,7 @@ a_week_ago = now - datetime.timedelta(7)
 start = a_week_ago.strftime("%Y-%m-%d %H:%M:%S")
 end = now.strftime("%Y-%m-%d %H:%M:%S")
 
-file_path = "/home/william/tmp/cs_ware.txt"
+file_path = "/home/admin/tmp/cs_ware.txt"
 file = open(file_path, "w+")
 print >> file, "\n %s 至 %s 的课件统计信息: \n" % (start, end)
 
