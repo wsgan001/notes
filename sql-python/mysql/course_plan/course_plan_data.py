@@ -32,9 +32,9 @@ def matchSubjectId(conn_tr, subject):
         return result_tuple[0][0]
 
 def insert_format_plan(format_plan_tuples):
-    conn_tr = MySQLdb.connect(host="121.40.83.12",
-                              user="forge", passwd="zhangmen1dui1",
-                              db='tr', charset="utf8")
+    conn_tr = MySQLdb.connect(host="",
+                              user="", passwd="",
+                              db="", charset="utf8")
     sql_tr = "INSERT INTO course_plan" \
              " (id, cou_id, stu_id, tea_id, grade_id, subject_id, course_hour, goal_suggestion," \
              " parent_suggestion, student_suggestion, created_at, updated_at)" \
@@ -69,12 +69,12 @@ def concate_format_plan(plan, gradeId, subjectId):
 
 html_parser = HTMLParser.HTMLParser()
 
-conn_forge = MySQLdb.connect(host="test.db.zm1v1.com",
-                             user="forge", passwd="Zhangmen1dui1",
-                             db='forge', charset="utf8")
-conn_tr = MySQLdb.connect(host="121.40.83.12",
-                          user="forge", passwd="zhangmen1dui1",
-                          db='tr', charset="utf8")
+conn_forge = MySQLdb.connect(host="",
+                             user="", passwd="",
+                             db="", charset="utf8")
+conn_tr = MySQLdb.connect(host="",
+                          user="", passwd="",
+                          db="", charset="utf8")
 
 try:
     source_plan_tuples = loadPlanData(conn_forge)

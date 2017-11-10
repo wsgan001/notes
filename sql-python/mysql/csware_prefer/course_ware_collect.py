@@ -13,9 +13,9 @@ def print_subject_cs_ware_map(csware_prefer, start, end, file):
 
     try:
         conn_forge = MySQLdb.connect(host="", user="",
-                                     passwd="", db='forge', charset="utf8")
+                                     passwd="", db="", charset="utf8")
         conn_tr = MySQLdb.connect(host="", user="",
-                                  passwd="", db="tr", charset="utf8")
+                                  passwd="", db="", charset="utf8")
         cursor_forge = conn_forge.cursor()
         cursor_tr = conn_tr.cursor()
         n_tr = cursor_tr.execute(sql_tr)

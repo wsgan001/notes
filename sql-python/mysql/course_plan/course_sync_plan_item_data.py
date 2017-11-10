@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-import sys,datetime,MySQLdb,HTMLParser
+import sys,MySQLdb,HTMLParser
 reload(sys)
 sys.setdefaultencoding("UTF-8")
 
@@ -8,10 +8,9 @@ sys.setdefaultencoding("UTF-8")
 def loadPlanData(conn_forge):
     sql_forge = "SELECT cpi_tmp.id, cp_tmp.cou_id, cpi_tmp.plan_id, plan_duration, plan_outlines," \
 	            " plan_content, deleted_state, cpi_tmp.updated_at, cpi_tmp.created_at" \
-                " FROM courses_plan_item  cpi_tmp" \
+                " FROM courses_plan_item_student  cpi_tmp" \
                 " left join courses_plan cp_tmp" \
-                " on cpi_tmp.plan_id = cp_tmp.id" \
-                " limit 300002, 300375"
+                " on cpi_tmp.plan_id = cp_tmp.id"
     cursor_forge = conn_forge.cursor()
     cursor_forge.execute(sql_forge)
     return cursor_forge.fetchall()
@@ -19,8 +18,8 @@ def loadPlanData(conn_forge):
 def insert_format_plan(format_plan_tuples):
     conn_tr = MySQLdb.connect(host="",
                               user="", passwd="",
-                              db='', charset="utf8")
-    sql_tr = "INSERT INTO course_plan_item (id, cou_id, plan_id, duration, outline, detail," \
+                              db="", charset="utf8")
+    sql_tr = "INSERT INTO course_sync_plan_item (id, cou_id, plan_id, duration, outline, detail," \
              "   deleted, updated_at, created_at)" \
              " VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
     cursor = conn_tr.cursor()
@@ -74,10 +73,12 @@ try:
         format_plan_tuples.append(format_plan)
         counter += 1
 
-        if counter % 100 == 0 and counter > 0:
+        if counter % 50 == 0 and counter > 0:
             insert_n = insert_format_plan(tuple(format_plan_tuples))
-            print "%s 条记录插入成功!" % insert_n
+            print "%s 条记录插入成功!", insert_n
             format_plan_tuples = []
+        else:
+            print "当前记录数: %d" % counter
 
     print "%d 条记录插入成功!" % counter
 

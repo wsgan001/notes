@@ -13,9 +13,9 @@ def loadPlanData(conn_forge):
 
 def insert_format_plan(format_plan_tuples):
     conn_tr = MySQLdb.connect(host="",
-                              user="forge", passwd="",
-                              db='tr', charset="utf8")
-    sql_tr = "INSERT INTO course_plan (id, goal_suggestion, parent_suggestion, student_suggestion) " \
+                              user="", passwd="",
+                              db="", charset="utf8")
+    sql_tr = "INSERT INTO course_sync_plan (id, goal_suggestion, parent_suggestion, student_suggestion) " \
              " VALUES (%s, %s, %s, %s)"
     cursor = conn_tr.cursor()
     insert_n = cursor.executemany(sql_tr, format_plan_tuples)
@@ -43,8 +43,8 @@ def concate_format_plan(plan):
     return tuple(format_plan)
 
 conn_forge = MySQLdb.connect(host="",
-                             user="forge", passwd="",
-                             db='forge', charset="utf8")
+                             user="", passwd="",
+                             db="", charset="utf8")
 
 html_parser = HTMLParser.HTMLParser()
 

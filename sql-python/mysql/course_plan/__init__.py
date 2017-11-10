@@ -11,9 +11,9 @@ sys.setdefaultencoding("UTF-8")
 #          " parent_suggestion, student_suggestion, created_at, updated_at)" \
 #          " VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) "
 #
-# conn_tr = MySQLdb.connect(host="121.40.83.12",
-#                           user="forge", passwd="zhangmen1dui1",
-#                           db='tr', charset="utf8")
+# conn_tr = MySQLdb.connect(host="",
+#                           user="", passwd="",
+#                           db="", charset="utf8")
 #
 # now = str(datetime.now())
 # one_line = ('6', '6', '6', '6', '6', '6', '2.0', '中文', '中文', '中文', now, now)
