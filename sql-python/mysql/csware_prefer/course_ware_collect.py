@@ -7,15 +7,18 @@ sys.setdefaultencoding("UTF-8")
 
 def print_subject_cs_ware_map(csware_prefer, start, end, file):
     subject_map = {}
-    sql_forge = "SELECT les_subject FROM `forge`.`lessons` WHERE id = "
+    sql_forge = "SELECT ls_tmp.les_subject, s_tmp.stu_grade FROM lessons ls_tmp" \
+                " left join students s_tmp on ls_tmp.stu_id = s_tmp.id" \
+                " where ls_tmp.id =  "
     sql_tr = "SELECT lesson_id FROM `tr`.`lesson_summary` WHERE " \
              "created_at between '%s' AND '%s' AND csware_prefer = %s" % (start, end, csware_prefer)
 
     try:
-        conn_forge = MySQLdb.connect(host="", user="",
-                                     passwd="", db="", charset="utf8")
-        conn_tr = MySQLdb.connect(host="", user="",
-                                  passwd="", db="", charset="utf8")
+        conn_forge = MySQLdb.connect(host="", user="zmforge_sa",
+                                     passwd="", db='forge', charset="utf8")
+        conn_tr = MySQLdb.connect(host="", user="tr_sa",
+                                  passwd="", db="tr", charset="utf8")
+
         cursor_forge = conn_forge.cursor()
         cursor_tr = conn_tr.cursor()
         n_tr = cursor_tr.execute(sql_tr)
@@ -24,13 +27,14 @@ def print_subject_cs_ware_map(csware_prefer, start, end, file):
         lesson_id_set = cursor_tr.fetchall()
         for lessonId in lesson_id_set:
             cursor_forge.execute(sql_forge + str(lessonId[0]))
-            subject = cursor_forge.fetchall()[0][0]
-            subject_count = subject_map.get(subject)
+            subject_grade_tuple = cursor_forge.fetchall();
+            grade_subject = "%s|%s" % (str(subject_grade_tuple[0][1]), subject_grade_tuple[0][0])
+            subject_count = subject_map.get(grade_subject)
             if subject_count is not None:
                 subject_count = int(subject_count) + 1
-                subject_map[subject] = subject_count
+                subject_map[grade_subject] = subject_count
             else:
-                subject_map[subject] = 0
+                subject_map[grade_subject] = 0
     except MySQLdb.Error, e:
         print "MySQLdb Operational Error! %s" % str(e)
 
@@ -54,7 +58,7 @@ a_week_ago = now - datetime.timedelta(7)
 start = a_week_ago.strftime("%Y-%m-%d %H:%M:%S")
 end = now.strftime("%Y-%m-%d %H:%M:%S")
 
-file_path = "/home/admin/tmp/cs_ware.txt"
+file_path = "/home/william/tmp/cs_ware.txt"
 file = open(file_path, "w+")
 print >> file, "\n %s 至 %s 的课件统计信息: \n" % (start, end)
 
