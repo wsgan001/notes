@@ -6,17 +6,17 @@ sys.setdefaultencoding("UTF-8")
 
 
 def loadPlanData(conn_forge):
-    sql_forge = "SELECT plan_id, expected_target, parent_subject, student_subject FROM courses_plan_student"
+    sql_forge = "SELECT plan_id, expected_target, parent_subject, student_subject, sync_state FROM courses_plan_student"
     cursor_forge = conn_forge.cursor()
     cursor_forge.execute(sql_forge)
     return cursor_forge.fetchall()
 
 def insert_format_plan(format_plan_tuples):
-    conn_tr = MySQLdb.connect(host="",
-                              user="", passwd="",
-                              db="", charset="utf8")
-    sql_tr = "INSERT INTO course_sync_plan (id, goal_suggestion, parent_suggestion, student_suggestion) " \
-             " VALUES (%s, %s, %s, %s)"
+    conn_tr = MySQLdb.connect(host="rm-bp1c76k6t475l4m99.mysql.rds.aliyuncs.com",
+                              user="tr_sa", passwd="8CXwb17Lz5AlML2V",
+                              db="tr", charset="utf8")
+    sql_tr = "INSERT INTO course_sync_plan (id, goal_suggestion, parent_suggestion, student_suggestion, updated) " \
+             " VALUES (%s, %s, %s, %s, %s)"
     cursor = conn_tr.cursor()
     insert_n = cursor.executemany(sql_tr, format_plan_tuples)
     conn_tr.commit()
@@ -26,7 +26,7 @@ def insert_format_plan(format_plan_tuples):
 def concate_format_plan(plan):
     format_plan = []
     for index in range(len(plan)):
-        if index == 0:
+        if index == 0 or index == 4:
             format_plan.append(plan[index])
         else:
             source_str = plan[index]
@@ -34,17 +34,16 @@ def concate_format_plan(plan):
             if source_str is not None:
                 tmp_str = html_parser.unescape(source_str)
             str_len = len(tmp_str)
-            if str_len > 500:
-                str_len = 499
+            if str_len > 3000:
+                str_len = 2999
             else:
                 str_len = (str_len - 1)
             format_plan.append(tmp_str[0:str_len])
 
     return tuple(format_plan)
 
-conn_forge = MySQLdb.connect(host="",
-                             user="", passwd="",
-                             db="", charset="utf8")
+conn_forge = MySQLdb.connect(host="rdsfomdtmy47yevw0p3e8.mysql.rds.aliyuncs.com", user="zmforge_sa",
+                             passwd="oFNQyen7erHU4lMeCb1wskCC", db='forge', charset="utf8")
 
 html_parser = HTMLParser.HTMLParser()
 

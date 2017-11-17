@@ -4,20 +4,16 @@ import sys,redis,MySQLdb
 reload(sys)
 sys.setdefaultencoding("UTF-8")
 
-# source_key = "teacher_teach_minutes_month_rank"
-# target_key = "course-hour-rank-key:teacher-month"
-# source_key = "student_used_hours_mounth_rank"
-# target_key = "course-hour-rank-key:student-month"
-
 source_key = "teacher_teach_minutes_month_rank"
 full_target_key = "course-hour-rank-key:full-teacher-month"
 part_target_key = "course-hour-rank-key:part-teacher-month"
 
-redis_conn = redis.Redis(host="", password="", port=6379, db=0)
+redis_conn = redis.Redis(host="",
+                         password="", port=6379, db=0)
 tuple_values = redis_conn.zrange(source_key, 0, -1, withscores=True)
 
-conn_forge = MySQLdb.connect(host="", user="forge",
-                             passwd="", db="forge", charset="utf8")
+conn_forge = MySQLdb.connect(host="", user="zmforge_sa",
+                             passwd="", db='forge', charset="utf8")
 
 sql = "SELECT time_type FROM teachers where id = "
 

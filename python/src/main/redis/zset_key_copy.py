@@ -9,7 +9,7 @@ target_key = "course-hour-rank-key:teacher-month"
 # source_key = "student_used_hours_mounth_rank"
 # target_key = "course-hour-rank-key:student-month"
 
-redis_conn = redis.Redis(host="120.26.93.151", password="kv(821b312121^dd(d1fvd", port=6379, db=0)
+redis_conn = redis.Redis(host="", password="", port=6379, db=0)
 tuple_values = redis_conn.zrange(source_key, 0, -1, withscores=True)
 
 counter = 0
