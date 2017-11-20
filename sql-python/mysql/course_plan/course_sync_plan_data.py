@@ -12,8 +12,8 @@ def loadPlanData(conn_forge):
     return cursor_forge.fetchall()
 
 def insert_format_plan(format_plan_tuples):
-    conn_tr = MySQLdb.connect(host="rm-bp1c76k6t475l4m99.mysql.rds.aliyuncs.com",
-                              user="tr_sa", passwd="8CXwb17Lz5AlML2V",
+    conn_tr = MySQLdb.connect(host="",
+                              user="", passwd="8CXwb17Lz5AlML2V",
                               db="tr", charset="utf8")
     sql_tr = "INSERT INTO course_sync_plan (id, goal_suggestion, parent_suggestion, student_suggestion, updated) " \
              " VALUES (%s, %s, %s, %s, %s)"
@@ -42,8 +42,8 @@ def concate_format_plan(plan):
 
     return tuple(format_plan)
 
-conn_forge = MySQLdb.connect(host="rdsfomdtmy47yevw0p3e8.mysql.rds.aliyuncs.com", user="zmforge_sa",
-                             passwd="oFNQyen7erHU4lMeCb1wskCC", db='forge', charset="utf8")
+conn_forge = MySQLdb.connect(host="", user="zmforge_sa",
+                             passwd="", db='forge', charset="utf8")
 
 html_parser = HTMLParser.HTMLParser()
 

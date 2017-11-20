@@ -4,6 +4,8 @@ import sys,datetime,MySQLdb
 reload(sys)
 sys.setdefaultencoding("UTF-8")
 
+def strtodatetime(datestr, format):
+    return datetime.datetime.strptime(datestr, format)
 
 def print_subject_cs_ware_map(csware_prefer, start, end, file):
     subject_map = {}
@@ -28,7 +30,22 @@ def print_subject_cs_ware_map(csware_prefer, start, end, file):
         for lessonId in lesson_id_set:
             cursor_forge.execute(sql_forge + str(lessonId[0]))
             subject_grade_tuple = cursor_forge.fetchall();
-            grade_subject = "%s|%s" % (str(subject_grade_tuple[0][1]), subject_grade_tuple[0][0])
+            if len(subject_grade_tuple) < 1:
+                print subject_grade_tuple
+                continue
+            if len(subject_grade_tuple[0]) < 2:
+                print subject_grade_tuple[0]
+                continue
+            grade_str = str(subject_grade_tuple[0][1])
+            grade_subject = "无|%s"
+            if grade_str.find("小") > -1:
+                grade_subject = "小学%s" % subject_grade_tuple[0][0]
+            elif grade_str.find("初") > -1:
+                grade_subject = "初中%s" % subject_grade_tuple[0][0]
+            elif grade_str.find("高") > -1:
+                grade_subject = "高中%s" % subject_grade_tuple[0][0]
+            else:
+                grade_subject = grade_subject % subject_grade_tuple[0][0]
             subject_count = subject_map.get(grade_subject)
             if subject_count is not None:
                 subject_count = int(subject_count) + 1
@@ -53,12 +70,12 @@ def print_subject_cs_ware_map(csware_prefer, start, end, file):
             print "conn_tr close error!"
     return subject_map
 
-now = datetime.datetime.now()
+now = strtodatetime("2017-11-19-23-59-59", "%Y-%m-%d-%H-%M-%S")
 a_week_ago = now - datetime.timedelta(7)
 start = a_week_ago.strftime("%Y-%m-%d %H:%M:%S")
 end = now.strftime("%Y-%m-%d %H:%M:%S")
 
-file_path = "/home/william/tmp/cs_ware.txt"
+file_path = "/home/admin/tmp/cs_ware.txt"
 file = open(file_path, "w+")
 print >> file, "\n %s 至 %s 的课件统计信息: \n" % (start, end)
 

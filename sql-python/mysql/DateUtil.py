@@ -33,3 +33,5 @@ def getDateRang(startDateStr, endDateStr):
 
 def getNowTime():
     return time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time()));
+
+print strtodatetime("2017-11-19-23-59-59", "%Y-%m-%d-%H-%M-%S")

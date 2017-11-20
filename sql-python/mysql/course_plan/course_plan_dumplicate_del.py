@@ -4,8 +4,8 @@ import sys,datetime,MySQLdb,HTMLParser
 reload(sys)
 sys.setdefaultencoding("UTF-8")
 
-conn_forge = MySQLdb.connect(host="rdsfomdtmy47yevw0p3e8.mysql.rds.aliyuncs.com", user="zmforge_sa",
-                             passwd="oFNQyen7erHU4lMeCb1wskCC", db='forge', charset="utf8")
+conn_forge = MySQLdb.connect(host="", user="zmforge_sa",
+                             passwd="", db='forge', charset="utf8")
 sql_forge = "delete from courses_plan where id in (6231, 6750, 7729, 8245, 8650) "
 
 try:
