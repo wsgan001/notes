@@ -5,6 +5,7 @@
 # 日期t>0时未来现金流与当前日期t=0之间的折现因子为Do(t)=e（-rt）次方
 import numpy as np
 
+
 class short_rate(object):
     def __init__(self, name, rate):
         self.name = name
@@ -25,7 +26,7 @@ class cash_flow_series(object):
     def present_value_list(self):
         df = self.short_rate.get_discount_factors(self.time_list)
         # 想问这一行中为什么可以这样子不继承第一个类可以调用第一个类的函数呢?
-        # https://www.zhihu.com/question/20021164 回答了
+        # https://www.zhihu.com/question/20021164回答了
         return np.array(self.cash_flows) * df
 
     def net_present_value(self):
