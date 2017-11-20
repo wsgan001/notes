@@ -25,6 +25,7 @@ class cash_flow_series(object):
     def present_value_list(self):
         df = self.short_rate.get_discount_factors(self.time_list)
         # 想问这一行中为什么可以这样子不继承第一个类可以调用第一个类的函数呢?
+        # https://www.zhihu.com/question/20021164 回答了
         return np.array(self.cash_flows) * df
 
     def net_present_value(self):
@@ -45,7 +46,6 @@ cash_flows = np.array([-100, 50, 75])
 time_list = [0.0, 1.0, 2.0]
 
 sr = short_rate('r', 0.05)
-
 print sr.get_discount_factors(time_list)
 
 sr.rate = 0.05
@@ -55,5 +55,4 @@ print cfs.present_value_list()
 cfs_sens = cfs_sensitivity('cfs', time_list, cash_flows, sr)
 
 npvs = cfs_sens.npv_sensitivity(short_rates)
-
 print npvs
