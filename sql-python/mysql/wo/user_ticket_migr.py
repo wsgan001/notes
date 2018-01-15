@@ -6,7 +6,8 @@ sys.setdefaultencoding("UTF-8")
 
 
 def load_answer_data(conn_old):
-    sql_forge = "SELECT id, qorder_id, uanswer_category_id, created_at FROM fb_user_answer"
+    sql_forge = "SELECT `id`, `question_title`, `question_desc`, `image_url`, `qcategory_id`," \
+                " `qstatus`, `question_source`, `created_at`, `updated_at` FROM `fb_question_order`"
     cursor_old = conn_old.cursor()
     cursor_old.execute(sql_forge)
     return cursor_old.fetchall()
@@ -15,8 +16,9 @@ def load_answer_data(conn_old):
 def insert_answer(format_answer_tuples):
     part_conn_new = MySQLdb.connect(host="127.0.0.1", user="root",
                                     passwd="123456", db="wo", charset="utf8")
-    sql_tr = "insert into fb_user_answer (id, ticket_id, category_id, created_at) " \
-             " VALUES (%s, %s, %s, %s)"
+    sql_tr = "INSERT INTO `fb_ticket` (`id`, `title`, `description`, `image_urls`, `category_id`, " \
+             "`state`, `source`, `created_at`, `updated_at`) " \
+             " VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
     cursor = part_conn_new.cursor()
     insert_count = cursor.executemany(sql_tr, format_answer_tuples)
     part_conn_new.commit()
@@ -24,21 +26,8 @@ def insert_answer(format_answer_tuples):
     return insert_count
 
 
-def format_answer(answer):
-    format_answer_tmp = []
-    format_answer_tmp.append(answer[0])
-    format_answer_tmp.append(answer[1])
-    format_answer_tmp.append(answer[2])
-    if answer[3] is None:
-        format_answer_tmp.append(datetime.datetime.now())
-    else:
-        format_answer_tmp.append(answer[3])
-
-    return tuple(format_answer_tmp)
-
-
-conn_old = MySQLdb.connect(host="121.40.83.12", user="forge",
-                           passwd="zhangmen1dui1", db='wo', charset="utf8")
+conn_old = MySQLdb.connect(host="", user="forge",
+                           passwd="", db='wo', charset="utf8")
 conn_new = MySQLdb.connect(host="127.0.0.1", user="root",
                            passwd="123456", db="wo", charset="utf8")
 

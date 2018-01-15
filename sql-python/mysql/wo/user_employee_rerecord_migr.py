@@ -6,8 +6,8 @@ sys.setdefaultencoding("UTF-8")
 
 
 def load_answer_data(conn_old):
-    sql_forge = "SELECT id, wid, qorder_id, qstatus, qcategory_id, qresult_id, remark, process_time " \
-                "FROM fb_qorder_worker_relation;"
+    sql_forge = "SELECT id, wid, qorder_id, qstatus, qresult_id, remark, process_time " \
+                "FROM fb_qorder_worker_twice;"
     cursor_old = conn_old.cursor()
     cursor_old.execute(sql_forge)
     return cursor_old.fetchall()
@@ -16,9 +16,9 @@ def load_answer_data(conn_old):
 def insert_answer(format_answer_tuples):
     part_conn_new = MySQLdb.connect(host="127.0.0.1", user="root",
                                     passwd="123456", db="wo", charset="utf8")
-    sql_tr = "INSERT INTO `fb_employee_record` (`id`, `employee_id`, `ticket_id`, `state`, `category_id`," \
+    sql_tr = "INSERT INTO `fb_employee_rerecord` (`id`, `employee_id`, `ticket_id`, `state`," \
              " `result_id`, `remark`, `process_time`)" \
-             " VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+             " VALUES (%s, %s, %s, %s, %s, %s, %s)"
     cursor = part_conn_new.cursor()
     insert_count = cursor.executemany(sql_tr, format_answer_tuples)
     part_conn_new.commit()
@@ -26,8 +26,8 @@ def insert_answer(format_answer_tuples):
     return insert_count
 
 
-conn_old = MySQLdb.connect(host="121.40.83.12", user="forge",
-                           passwd="zhangmen1dui1", db='wo', charset="utf8")
+conn_old = MySQLdb.connect(host="", user="forge",
+                           passwd="", db='wo', charset="utf8")
 conn_new = MySQLdb.connect(host="127.0.0.1", user="root",
                            passwd="123456", db="wo", charset="utf8")
 

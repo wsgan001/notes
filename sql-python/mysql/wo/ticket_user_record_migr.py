@@ -1,12 +1,16 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-import sys,datetime,MySQLdb
+import sys,MySQLdb
 reload(sys)
 sys.setdefaultencoding("UTF-8")
 
 
 def load_answer_data(conn_old):
-    sql_forge = "SELECT id, qorder_id, content, created_at FROM fb_question_answer "
+    sql_forge = "SELECT id, qorder_id, username, fbud_tmp.mobile, role, contact, net_state," \
+                " platform_info, version_info, device_state_info, created_at, updated_at" \
+                " FROM wo.fb_user_device fbud_tmp" \
+                " left join fb_qorder_user_relation fbqur_tmp" \
+                " on fbud_tmp.id = fbqur_tmp.user_id "
     cursor_old = conn_old.cursor()
     cursor_old.execute(sql_forge)
     return cursor_old.fetchall()
@@ -15,7 +19,10 @@ def load_answer_data(conn_old):
 def insert_answer(format_answer_tuples):
     part_conn_new = MySQLdb.connect(host="127.0.0.1", user="root",
                                     passwd="123456", db="wo", charset="utf8")
-    sql_tr = "INSERT INTO `fb_employee_ticket_answer` (`id`, `ticket_id`, `content`, `created_at`)"
+    sql_tr = "INSERT INTO `fb_ticket_user_record` (`id`, `ticket_id`, `username`, `mobile`," \
+             " `role`, `contact`, `net_state`, `platform_info`, `version_info`, `device_state_info`," \
+             " `created_at`, `updated_at`) " \
+             " VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
     cursor = part_conn_new.cursor()
     insert_count = cursor.executemany(sql_tr, format_answer_tuples)
     part_conn_new.commit()
@@ -23,8 +30,8 @@ def insert_answer(format_answer_tuples):
     return insert_count
 
 
-conn_old = MySQLdb.connect(host="121.40.83.12", user="forge",
-                           passwd="zhangmen1dui1", db='wo', charset="utf8")
+conn_old = MySQLdb.connect(host="", user="forge",
+                           passwd="", db='wo', charset="utf8")
 conn_new = MySQLdb.connect(host="127.0.0.1", user="root",
                            passwd="123456", db="wo", charset="utf8")
 

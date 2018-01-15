@@ -8,7 +8,7 @@ sys.setdefaultencoding("UTF-8")
 def loadPlanData(conn_forge):
     sql_forge = " SELECT id, cou_id, tea_id, stu_id, grade, les_subject, plan_mins," \
                 "    expected_target, parent_subject, student_subject, created_at, updated_at" \
-                " FROM courses_plan"
+                " FROM courses_plan where id < 9552"
     cursor_forge = conn_forge.cursor()
     cursor_forge.execute(sql_forge)
     return cursor_forge.fetchall()
@@ -32,11 +32,11 @@ def matchSubjectId(conn_tr, subject):
         return result_tuple[0][0]
 
 def insert_format_plan(format_plan_tuples):
-    conn_tr = MySQLdb.connect(host="",
-                              user="tr_sa", passwd="",
+    conn_tr = MySQLdb.connect(host="121.40.83.12",
+                              user="forge", passwd="zhangmen1dui1",
                               db="tr", charset="utf8")
     sql_tr = "INSERT INTO course_plan" \
-             " (id, cou_id, stu_id, tea_id, grade_id, subject_id, course_hour, goal_suggestion," \
+             " (id, cou_id, tea_id, stu_id, grade_id, subject_id, course_hour, goal_suggestion," \
              " parent_suggestion, student_suggestion, created_at, updated_at)" \
              " VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
     cursor = conn_tr.cursor()
@@ -69,9 +69,9 @@ def concate_format_plan(plan, gradeId, subjectId):
 
 html_parser = HTMLParser.HTMLParser()
 
-conn_forge = MySQLdb.connect(host="", user="zmforge_sa",
+conn_forge = MySQLdb.connect(host="", user="forge",
                              passwd="", db='forge', charset="utf8")
-conn_tr = MySQLdb.connect(host="", user="tr_sa",
+conn_tr = MySQLdb.connect(host="", user="forge",
                           passwd="", db="tr", charset="utf8")
 
 try:

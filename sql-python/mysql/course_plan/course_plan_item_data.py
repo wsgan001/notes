@@ -18,7 +18,7 @@ def loadPlanData(conn_forge):
 
 def insert_format_plan(format_plan_tuples):
     conn_tr = MySQLdb.connect(host="",
-                              user="tr_sa", passwd="8CXwb17Lz5AlML2V",
+                              user="tr_sa", passwd="",
                               db="tr", charset="utf8")
     sql_tr = "INSERT INTO course_plan_item (id, cou_id, plan_id, duration, outline, detail," \
              "   deleted, updated_at, created_at)" \
